@@ -43,9 +43,10 @@ public class InventoryController {
 	@PostMapping("/addItems")
 	public Items addItems(@RequestBody Items items) {
 		
-		/*logger.info(" Books Added Successfully...");*/
+		System.out.println(" Items Added Successfully...");
+		System.out.println(items);
 		return repo.save(items);
-
+		
 	}
 	
 	@GetMapping("/getItems")
@@ -55,37 +56,37 @@ public class InventoryController {
 	}
 	
 	
-	@DeleteMapping(value = "/deleteItems/{s_no}")
-	public Map<String, Boolean> deleteItem(@PathVariable("s_no") int s_no)throws Exception{
+	@DeleteMapping(value = "/deleteItems/{itemno}")
+	public Map<String, Boolean> deleteItem(@PathVariable("itemno") int itemno)throws Exception{
 	Items item =
         repo
-            .findById(s_no)
-            .orElseThrow(() -> new ItemNotFoundException("Book not found on :: " + s_no));
+            .findById(itemno)
+            .orElseThrow(() -> new ItemNotFoundException("Book not found on :: " + itemno));
     repo.delete(item);
     Map<String, Boolean> response = new HashMap<>();
     response.put("deleted", Boolean.TRUE);
     return response;
   }
 	
-	@GetMapping("/items/{id}")
-    public ResponseEntity<Items> getItemNo(@PathVariable(value = "id") int s_no)
+	@GetMapping("/items/{itemno}")
+    public ResponseEntity<Items> getItemNo(@PathVariable(value = "itemno") int itemno)
       throws ItemNotFoundException {
-        Items item = repo.findById(s_no)
-           .orElseThrow(() -> new ItemNotFoundException("Book not found for this id :: " + s_no));
+        Items item = repo.findById(itemno)
+           .orElseThrow(() -> new ItemNotFoundException("Book not found for this id :: " + itemno));
         return ResponseEntity.ok().body(item);
     }
 
-	 @PutMapping("/updateItems/{id}")
-	    public ResponseEntity<Items> updateItem(@PathVariable(value = "id") int s_no,
+	 @PutMapping("/updateItems/{itemno}")
+	    public ResponseEntity<Items> updateItem(@PathVariable(value = "itemno") int itemno,
 	      @Valid @RequestBody Items itemDetails) throws ItemNotFoundException {
 		 
-	        Items item= repo.findById(s_no)
-	           .orElseThrow(() -> new ItemNotFoundException("Book not found for this id :: " + s_no));
+	        Items item= repo.findById(itemno)
+	           .orElseThrow(() -> new ItemNotFoundException("Book not found for this id :: " + itemno));
 	        
 	        item.setName(itemDetails.getName());
 	        item.setCategory(itemDetails.getCategory());
-	        item.setCost_price(itemDetails.getCost_price());
-	        item.setSelling_price(itemDetails.getSelling_price());
+	        item.setCprice(itemDetails.getCprice());
+	        item.setSprice(itemDetails.getSprice());
 	        item.setQuantity(itemDetails.getQuantity());
 	        final Items updatedItem = repo.save(item);
 	        return ResponseEntity.ok(updatedItem);

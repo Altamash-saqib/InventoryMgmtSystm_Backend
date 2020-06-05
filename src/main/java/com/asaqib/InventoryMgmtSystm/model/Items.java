@@ -11,14 +11,14 @@ import javax.persistence.Id;
 @Entity
 public class Items {
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
-	private int s_no;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int itemno;
 	@Column
 	private String name;
 	private String category;
-	private float cost_price;
-	private float selling_price;
-	private int quantity;
+	private float cprice;
+	private float sprice;
+	private String quantity;
 	// Date date = new Date();
 	
 	public Items() {
@@ -26,13 +26,16 @@ public class Items {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getS_no() {
-		return s_no;
+
+	public int getItemno() {
+		return itemno;
 	}
 
-	public void setS_no(int s_no) {
-		this.s_no = s_no;
+
+	public void setItemno(int itemno) {
+		this.itemno = itemno;
 	}
+
 
 	public String getName() {
 		return name;
@@ -50,35 +53,43 @@ public class Items {
 		this.category = category;
 	}
 
-	public float getCost_price() {
-		return cost_price;
+
+	public float getCprice() {
+		return cprice;
 	}
 
-	public void setCost_price(float cost_price) {
-		this.cost_price = cost_price;
+
+	public void setCprice(float cprice) {
+		this.cprice = cprice;
 	}
 
-	public float getSelling_price() {
-		return selling_price;
+
+	public float getSprice() {
+		return sprice;
 	}
 
-	public void setSelling_price(float selling_price) {
-		this.selling_price = selling_price;
+
+	public void setSprice(float sprice) {
+		this.sprice = sprice;
 	}
 
-	public int getQuantity() {
+
+	public String getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(String quantity) {
 		this.quantity = quantity;
 	}
 
+
 	@Override
 	public String toString() {
-		return "Items [s_no=" + s_no + ", name=" + name + ", category=" + category + ", cost_price=" + cost_price
-				+ ", selling_price=" + selling_price + ", quantity=" + quantity + "]";
+		return "Items [itemno=" + itemno + ", name=" + name + ", category=" + category + ", cprice=" + cprice
+				+ ", sprice=" + sprice + ", quantity=" + quantity+ "]";
 	}
+
+	
 	
 }
 	
