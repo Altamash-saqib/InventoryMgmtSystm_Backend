@@ -89,6 +89,7 @@ public class InventoryController {
 	        item.setSprice(itemDetails.getSprice());
 	        item.setQuantity(itemDetails.getQuantity());
 	        final Items updatedItem = repo.save(item);
+	        System.out.println("Item Updated Successfully...");
 	        return ResponseEntity.ok(updatedItem);
 	    }
 }
